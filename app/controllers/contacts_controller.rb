@@ -14,4 +14,8 @@ class ContactsController < ApplicationController
                               email: params[:email])
     redirect_to "/contacts/#{@contact.id}"
   end
+
+  def show
+    @contact = Contact.find(params[:id])
+  end
 end
