@@ -3,6 +3,10 @@ class ContactsController < ApplicationController
     @contacts = Contact.all
   end
 
+  def show
+    @contact = Contact.find(params[:id])
+  end
+
   def new
     
   end
@@ -12,11 +16,6 @@ class ContactsController < ApplicationController
                               last_name: params[:last_name],
                               phone_number: params[:phone_number],
                               email: params[:email])
-    redirect_to "/contacts/#{@contact.id}"
-  end
-
-  def show
-    @contact = Contact.find(params[:id])
   end
 
   def edit
