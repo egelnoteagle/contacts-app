@@ -8,3 +8,6 @@
 <br>
 <%= link_to 'Delete', "/contacts/#{@contact.id}", method: :delete %>
 
+<% @contact.groups.each do |group| %>
+<h3><%= group.name %></h3>
+<% end %>

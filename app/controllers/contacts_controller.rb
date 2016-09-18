@@ -1,6 +1,11 @@
 class ContactsController < ApplicationController
   def index
-    @contacts = Contact.all
+    @contacts = Contact.all 
+    group = params[:group]
+
+    if group
+      @contacts = Group.find_by(name: group).contacts
+    end  
   end
 
   def show
@@ -18,6 +23,10 @@ class ContactsController < ApplicationController
                               phone_number: params[:phone_number],
                               email: params[:email],
                               bio: params[:bio])
+  end
+
+  def full_name
+    "#{contact.first_name} #{contact.middle_name} #{contact.last_name}"
   end
 
   def edit

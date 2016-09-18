@@ -28,13 +28,19 @@
         <li class="active"><a href="#">Test <span class="sr-only">(current)</span></a></li>
         <li><a href="/contacts/new">Add Contact</a></li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Menu <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
+          <% if current_user %>
+            <li><%= link_to  'Log Out', '/logout', method: :delete %></li>
+            <% else %>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/login">Log In</a></li>
+            <% end %>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
+            <li>Groups</li>
+            <% Group.all.each do |group| %>
+            <li><a href="/contacts?group=<%= group.name %>"><%= group.name.titleize %></a></li>
+            <% end %>
             <li role="separator" class="divider"></li>
             <li><a href="#">One more separated link</a></li>
           </ul>
@@ -63,5 +69,6 @@
   </div><!-- /.container-fluid -->
 </nav>
     <%= yield %>
+    
   </body>
 </html>
